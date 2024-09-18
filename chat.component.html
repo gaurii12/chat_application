@@ -1,0 +1,29 @@
+<div class="chat-container">
+    <!-- Input field for joining the chat -->
+    <div class="join-chat">
+      <input [(ngModel)]="userName" placeholder="Enter your name" />
+      <button (click)="joinChat()">Join Chat</button>
+    </div>
+  
+    <!-- Chat Messages -->
+    <div class="chat-messages">
+      <div *ngFor="let message of messages" 
+           [ngClass]="{'message-left': message.name !== userName && message.name !== '', 
+                       'message-right': message.name === userName, 
+                       'notification': message.name === ''}" 
+           class="message">
+        <div class="message-content">
+          <strong *ngIf="message.name">{{ message.name }}:</strong> 
+          <span>{{ message.message }}</span>
+          <span class="timestamp" *ngIf="message.timestamp">{{ message.timestamp | date:'shortTime' }}</span>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Input field for sending messages -->
+    <div class="send-message">
+      <input [(ngModel)]="newMessage" placeholder="Enter your message" />
+      <button (click)="sendMessage()">Send</button>
+    </div>
+  </div>
+  
